@@ -1,10 +1,10 @@
 
-import { useCallback, useEffect, useMemo,  useState } from "react";
+import { useEffect, useMemo,  useState } from "react";
 import MapGL, { FullscreenControl, Marker, NavigationControl, Popup, ScaleControl} from "react-map-gl";
 import Papa from 'papaparse'
 import ShipInfo from "../../component/shipInfo";
 import { fetchCSVData } from "../../utils/fetchCSVData";
-import DrawControl from "../../utils/drawControl";
+
 
 
 
@@ -30,9 +30,13 @@ const Map = () => {
 
   const fetchData = async () => {
     const res= await fetchCSVData('./port_geo_location - port_geo_location.csv')
-    if(res)setText(res)
+    if (res) {
+      setText(res)
+    }
     try {
-      if(text=="")return
+      if (text=="") {
+        return
+      }
       Papa.parse(text, {
         header: true,
         complete: (result) => {
@@ -64,21 +68,7 @@ const Map = () => {
     </Marker>
   )),[data])
 
-  const onUpdate = useCallback(e => {
-    const points = e.features[0].geometry.cordinates[0][0]
-    console.log(points)
-    
-  }, []);
-
-  const onDelete = useCallback(e => {
-    setFeatures(currFeatures => {
-      const newFeatures = {...currFeatures};
-      for (const f of e.features) {
-        delete newFeatures[f.id];
-      }
-      return newFeatures;
-    });
-  }, []);
+  
 
   
 
@@ -101,18 +91,7 @@ const Map = () => {
         
       > 
         
-        <DrawControl
-          position="top-left"
-          displayControlsDefault={false}
-          controls={{
-            polygon: true,
-            trash: true
-          }}
-          default="draw-polygon"
-          onCreate={onUpdate}
-          onUpdate={onUpdate}
-          onDelete={onDelete}
-        />
+        
         <FullscreenControl position="top-left" />
         <NavigationControl position="top-left" />
         <ScaleControl />   
