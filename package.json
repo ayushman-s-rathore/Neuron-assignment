@@ -10,7 +10,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@mapbox/mapbox-gl-draw": "^1.4.3",
+    
     "dotenv": "^16.4.5",
     "mapbox-gl": "^3.3.0",
     

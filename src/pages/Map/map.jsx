@@ -18,8 +18,7 @@ const Map = () => {
   const [data, setData]= useState([])
   const [ text, setText ] = useState("");
   const [popupInfo, setPopupInfo] = useState(null);
-  const [features, setFeatures] = useState([]);
-  const [mode, setMode] = useState(null)
+
   
 
 
